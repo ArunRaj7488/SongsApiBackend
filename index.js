@@ -12,8 +12,10 @@ app.get('/',  async(req, res) => {
 	res.send(song)
 });
 
-app.post('/',  async(req,res) =>{
-
+app.post('/', async(req,res) =>{
+		try{
+			
+		console.log(req.body)
 		const { error } = validateSchema(req.body);
 		if(error) return res.status(404).send(error.details[0].message);
 
@@ -23,6 +25,9 @@ app.post('/',  async(req,res) =>{
 		const song = new Song(req.body);
 		await song.save(song);
 		res.send(song);
+		}catch(ex){
+			res.send({ex})
+		}
 })
 
 port = process.env.PORT || 5000;
