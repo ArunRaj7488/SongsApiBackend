@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const {Song, validateSchema} = require('./db');
+const { Song } = require('./db');
 
 app.use(cors());
 
@@ -14,14 +14,7 @@ app.get('/',  async(req, res) => {
 
 app.post('/', async(req,res) =>{
 		try{
-			
-		console.log(req.body)
-		// const { error } = validateSchema(req.body);
-		// if(error) return res.status(404).send(error.details[0].message);
 
-		// const songName = await Song.findOne({songName: req.body.songName});
-		// if(songName) return res.status(400).send('song is already exist');
-		
 		const song = new Song(req.body);
 		await song.save(song);
 		res.send(song);
