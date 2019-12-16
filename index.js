@@ -3,14 +3,15 @@ const cors = require('cors');
 const app = express();
 const {Song, validateSchema} = require('./db');
 
-app.use(cors());
+// app.use(cors());
 
 app.use(express.json());
 
 
 app.get('/',  async(req, res) => {
+	
 	const song = await Song.find();
-	res.send(song)
+	res.setHeader({"Access-Control-Allow-Origin":" https://localhost:3000/"}).send(song)
 });
 
 app.post('/', cors(),  async(req,res) =>{

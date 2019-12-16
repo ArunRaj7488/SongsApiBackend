@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/song')
+mongoose.connect('mongodb://localhost:27017/song', { useUnifiedTopology: true })
 .then(() => console.log('connected to mongodb'))
 .catch(err => console.log('mongodb not connected ...', err));
 
